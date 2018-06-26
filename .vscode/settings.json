@@ -13,7 +13,9 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "initializer_list": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "functional": "cpp",
+        "type_traits": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
