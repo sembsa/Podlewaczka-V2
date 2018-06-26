@@ -1,0 +1,19 @@
+{
+    "terminal.integrated.env.osx": {
+        "PATH": "/Users/sembsa/.platformio/penv/bin:/Users/sembsa/.platformio/penv:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/opt/X11/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands",
+        "PLATFORMIO_CALLER": "vscode"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "files.associations": {
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "initializer_list": "cpp",
+        "bitset": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
