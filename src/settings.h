@@ -16,6 +16,8 @@ PubSubClient mqtt(client);
 //INFO
 
 shk_mqtt temperature(mqtt, "podlewaczka", "bme280", "temperature");
+shk_mqtt pressure(mqtt, "podlewaczka", "bme280", "pressure");
+shk_mqtt humidity(mqtt, "podlewaczka", "bme280", "humidity");
 shk_mqtt fan(mqtt, "podlewaczka", "fan", "on");
 
 void setupOTA() {
@@ -114,6 +116,8 @@ void connectMQTT() {
 
       //Wątek do subskrypcji
       temperature.subscribeTopic();
+      pressure.subscribeTopic();
+      humidity.subscribeTopic();
       fan.subscribeTopic();
 
     } else {

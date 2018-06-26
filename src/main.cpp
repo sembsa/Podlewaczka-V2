@@ -15,7 +15,6 @@ bool statusSendMQTTDebug = false;
 bool statusBME280;
 
 void fanControl(bool b) {
-  
   if (b) {
     digitalWrite(FAN_ON, HIGH);
     fan.publishStatus("true");
@@ -24,6 +23,12 @@ void fanControl(bool b) {
     fan.publishStatus("false");
   }
   
+}
+
+void sendBME280Data() {
+  temperature.publishStatus(String(bme.readTemperature()));
+  pressure.publishStatus(String(bme.readPressure()));
+  humidity.publishStatus(String(bme.readHumidity()));
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -69,11 +74,13 @@ void setup() {
   digitalWrite(FAN_ON, LOW);
   digitalWrite(PUMP_ON, HIGH);
 
+  //Setup Serial
   Serial.begin(115200);
   delay(1000);
 
   setupWiFi();
 
+  //Show Topics
   temperature.showTopic();
   fan.showTopic();
 
@@ -82,6 +89,9 @@ void setup() {
 
   //Setup MQTT Calback
   mqtt.setCallback(callback);
+
+  //Setup timer
+  timer.attach(10.0, sendBME280Data);
   
 }
 
