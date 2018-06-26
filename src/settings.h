@@ -19,6 +19,7 @@ shk_mqtt temperature(mqtt, "podlewaczka", "bme280", "temperature");
 shk_mqtt pressure(mqtt, "podlewaczka", "bme280", "pressure");
 shk_mqtt humidity(mqtt, "podlewaczka", "bme280", "humidity");
 shk_mqtt fan(mqtt, "podlewaczka", "fan", "on");
+shk_mqtt pump(mqtt, "podlewaczka", "pump", "on");
 
 void setupOTA() {
 
@@ -114,11 +115,12 @@ void connectMQTT() {
     if (mqtt.connect(clientId.c_str(), "/info", 0, false, "/error/podlewaczka")) {
       Serial.printf("[MQTT] Client %s connected to MQTT\n", clientId.c_str());
 
-      //Wątek do subskrypcji
-      temperature.subscribeTopic();
-      pressure.subscribeTopic();
-      humidity.subscribeTopic();
+      //Tematy do subskrypcji
+      //temperature.subscribeTopic();
+      //pressure.subscribeTopic();
+      //humidity.subscribeTopic();
       fan.subscribeTopic();
+      pump.subscribeTopic();
 
     } else {
       //Serial.printf("MQTT: Failed, rc=%i\n", mqtt.state());

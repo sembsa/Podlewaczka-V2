@@ -14,15 +14,24 @@ Adafruit_BME280 bme;
 bool statusSendMQTTDebug = false;
 bool statusBME280;
 
-void fanControl(bool b) {
-  if (b) {
+void fanControl(bool on) {
+  if (on) {
     digitalWrite(FAN_ON, HIGH);
     fan.publishStatus("true");
   } else {
     digitalWrite(FAN_ON, LOW);
     fan.publishStatus("false");
   }
-  
+}
+
+void pumpControl(bool on) {
+  if (on) {
+    digitalWrite(PUMP_ON, LOW);
+    pump.publishStatus("true");
+  } else {
+    digitalWrite(PUMP_ON, HIGH);
+    pump.publishStatus("false");
+  }
 }
 
 void sendBME280Data() {
@@ -43,14 +52,22 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println(payloadString);
   
   if (topicString == fan._topicSet) {
-    
     if (payloadString == "true") {
       fanControl(true);
     } else if (payloadString == "false") {
       fanControl(false);
     }
-    
   }
+
+  
+  if (topicString == pump._topicSet) {
+    if (payloadString == "true") {
+      pumpControl(true);
+    } else if (payloadString == "false") {
+      pumpControl(false);
+    }
+  }
+  
   
   // Serial.println();
 
@@ -82,6 +99,8 @@ void setup() {
 
   //Show Topics
   temperature.showTopic();
+  pressure.showTopic();
+  humidity.showTopic();
   fan.showTopic();
 
   //Setup BME280
